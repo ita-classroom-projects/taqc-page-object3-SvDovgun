@@ -9,13 +9,12 @@ public class AdvancedClubPage extends ClubPage {
 
     private WebElement advancedSearchLabel;
 
-    public AdvancedClubPage(WebDriver driver) {
-        super(driver);
+    public AdvancedClubPage() {
         initElements();
     }
 
     private void initElements() {
-        advancedSearchLabel = driver.findElement(By.cssSelector("div.ant-layout-sider-children > div.club-list-label"));
+        advancedSearchLabel = search.cssSelector("div.ant-layout-sider-children > div.club-list-label");
     }
 
     // Page Object
@@ -36,12 +35,12 @@ public class AdvancedClubPage extends ClubPage {
     @Override
     public AdvancedClubPage previousClubPagination() {
         clickPreviousClubPagination();
-        return new AdvancedClubPage(driver);
+        return new AdvancedClubPage();
     }
 
     @Override
     public AdvancedClubPage nextClubPagination() {
         clickNextClubPagination();
-        return new AdvancedClubPage(driver);
+        return new AdvancedClubPage();
     }
 }

@@ -10,14 +10,13 @@ public class ClubNotFoundPage extends TopSearchPart {
 
     private WebElement notFoundLabel;
 
-    public ClubNotFoundPage(WebDriver driver) {
-        super(driver);
+    public ClubNotFoundPage() {
         initElements();
     }
 
     private void initElements() {
         // init elements
-        notFoundLabel = driver.findElement(By.cssSelector("div.clubs-not-found"));
+        notFoundLabel = search.cssSelector("div.clubs-not-found");
     }
 
     // Page Object

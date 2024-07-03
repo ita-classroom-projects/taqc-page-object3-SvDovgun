@@ -12,14 +12,13 @@ public class ClubPage extends TopSearchPart {
 
     private ClubsContainer clubsContainer;
 
-    public ClubPage(WebDriver driver) {
-        super(driver);
+    public ClubPage() {
         initElements();
     }
 
     private void initElements() {
         // init elements
-        clubsContainer = new ClubsContainer(driver);
+        clubsContainer = new ClubsContainer();
     }
 
     // Page Object
@@ -68,17 +67,17 @@ public class ClubPage extends TopSearchPart {
 
     public ClubPage previousClubPagination() {
         clickPreviousClubPagination();
-        return new ClubPage(driver);
+        return new ClubPage();
     }
 
     public ClubPage nextClubPagination() {
         clickNextClubPagination();
-        return new ClubPage(driver);
+        return new ClubPage();
     }
 
     public ClubPage chooseClubPaginationNumber(int numberPage) {
         getClubContainer().clickPageLinkByNumber(numberPage);
-        return new ClubPage(driver);
+        return new ClubPage();
     }
 
 }

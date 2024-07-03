@@ -9,14 +9,13 @@ public class AboutUsPage extends TopSearchPart {
 
     private WebElement ourContactLabel;
 
-    public AboutUsPage(WebDriver driver) {
-        super(driver);
+    public AboutUsPage() {
         initElements();
     }
 
     private void initElements() {
         // init elements
-        ourContactLabel = driver.findElement(By.cssSelector("div.social-media span.text"));
+        ourContactLabel = search.cssSelector("div.social-media span.text");
     }
 
     // Page Object

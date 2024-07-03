@@ -1,5 +1,7 @@
 package com.softserve.edu.teachua.pages.club;
 
+import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +11,8 @@ import java.util.List;
 
 public class ClubComponent {
 
-    protected WebDriver driver;
+    //protected WebDriver driver;
+    protected Search search;
     private WebElement clubCard;
     //
     private WebElement titleLink;
@@ -18,19 +21,21 @@ public class ClubComponent {
     private WebElement addressLabel;
     private WebElement detailsButton;
 
-    public ClubComponent(WebDriver driver, WebElement clubCard) {
-        this.driver = driver;
+    public ClubComponent(WebElement clubCard) {
+//        this.driver = driver;
+//        this.clubCard = clubCard;
         this.clubCard = clubCard;
+        search = SearchStrategy.getSearch();
         initElements();
     }
 
     private void initElements() {
         // init elements
-        titleLink = clubCard.findElement(By.cssSelector("div.title"));
-        categoriesLabel = clubCard.findElements(By.cssSelector("div.tags.club-tags span.name"));
-        descriptionLabel = clubCard.findElement(By.cssSelector("p.description"));
-        addressLabel = clubCard.findElement(By.cssSelector("div.address"));
-        detailsButton = clubCard.findElement(By.cssSelector("a.details-button > a"));
+        titleLink = search.cssSelector("div.title");
+        categoriesLabel = search.cssSelectors("div.tags.club-tags span.name");
+        descriptionLabel = search.cssSelector("p.description");
+        addressLabel = search.cssSelector("div.address");
+        detailsButton = search.cssSelector("a.details-button > a");
     }
 
     // Page Object
@@ -98,12 +103,12 @@ public class ClubComponent {
 
     public ClubInfoModal openClubInfoModal() {
         clickTitleLink();
-        return new ClubInfoModal(driver);
+        return new ClubInfoModal();
     }
 
     public ClubDetailsPage openClubDetailsPage() {
         clickDetailsButton();
-        return new ClubDetailsPage(driver);
+        return new ClubDetailsPage();
     }
 
 }

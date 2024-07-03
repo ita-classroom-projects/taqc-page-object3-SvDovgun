@@ -1,6 +1,7 @@
 package com.softserve.edu.teachua.pages.challenge;
 
 import com.softserve.edu.teachua.pages.top.TopSearchPart;
+import com.softserve.edu.teachua.wraps.browser.DriverUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,14 +11,13 @@ public class ChallengeTeachPage extends ChallengePage {
     private WebElement commentLabel;
     private WebElement webinarIframe;
 
-    public ChallengeTeachPage(WebDriver driver) {
-        super(driver);
+    public ChallengeTeachPage() {
         initElements();
     }
 
     private void initElements() {
-        commentLabel = driver.findElement(By.xpath("//p[contains(text(), 'Вуйтік')]"));
-        webinarIframe = driver.findElement(By.xpath("//iframe[contains(@src, '/JMAF_pSOBws')]"));
+        commentLabel = search.xpath("//p[contains(text(), 'Вуйтік')]");
+        webinarIframe = search.xpath("//iframe[contains(@src, '/JMAF_pSOBws')]");
     }
 
     // Page Object
@@ -46,8 +46,8 @@ public class ChallengeTeachPage extends ChallengePage {
 
     public YoutubeFrame gotoYoutubeFrame() {
         // clickWebinarIframe();
-        driver.switchTo().frame(getWebinarIframe());
-        return new YoutubeFrame(driver);
+        DriverUtils.switchToFrame(getWebinarIframe());
+        return new YoutubeFrame();
     }
 
 }

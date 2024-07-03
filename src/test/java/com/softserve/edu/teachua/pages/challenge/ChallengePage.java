@@ -9,13 +9,12 @@ public abstract class ChallengePage extends TopSearchPart {
 
     private WebElement bannerLabel;
 
-    public ChallengePage(WebDriver driver) {
-        super(driver);
+    public ChallengePage() {
         initElements();
     }
 
     private void initElements() {
-        bannerLabel = driver.findElement(By.cssSelector("div.banner span.title"));
+        bannerLabel = search.cssSelector("div.banner span.title");
     }
 
     // Page Object

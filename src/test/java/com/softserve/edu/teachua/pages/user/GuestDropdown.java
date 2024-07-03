@@ -1,18 +1,22 @@
 package com.softserve.edu.teachua.pages.user;
 
+import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class GuestDropdown {
 
-    private WebDriver driver;
+    //private WebDriver driver;
+    protected Search search;
     //
     private WebElement register;
     private WebElement login;
 
-    public GuestDropdown(WebDriver driver) {
-        this.driver = driver;
+    public GuestDropdown() {
+        //this.driver = driver;
+        search = SearchStrategy.getSearch();
         initElements();
     }
 
@@ -24,8 +28,8 @@ public class GuestDropdown {
             throw new RuntimeException(e);
         }
         // init elements
-        register = driver.findElement(By.cssSelector("li[data-menu-id*='register'] span.ant-dropdown-menu-title-content"));
-        login = driver.findElement(By.cssSelector("li[data-menu-id*='login'] span.ant-dropdown-menu-title-content"));
+        register = search.cssSelector("li[data-menu-id*='register'] span.ant-dropdown-menu-title-content");
+        login = search.cssSelector("li[data-menu-id*='login'] span.ant-dropdown-menu-title-content");
     }
 
     // Page Object
@@ -62,7 +66,7 @@ public class GuestDropdown {
 
     public LoginModal openLoginModal() {
         clickLogin();
-        return new LoginModal(driver);
+        return new LoginModal();
     }
 
 }

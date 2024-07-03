@@ -16,10 +16,7 @@ import java.util.Map;
 
 import com.softserve.edu.teachua.tools.PropertiesUtils;
 import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 public final class DriverUtils {
     private static final String TIME_TEMPLATE = "yyyy-MM-dd_HH-mm-ss-S";
@@ -99,6 +96,13 @@ public final class DriverUtils {
         getDriver().get(url);
     }
 
+    public static void switchToFrame(WebElement webElement) {
+        getDriver().switchTo().frame(webElement);
+    }
+
+    public static void switchToDefaultContent() {
+        getDriver().switchTo().defaultContent();
+    }
     public static void takeScreenShot() {
         //String currentTime = new SimpleDateFormat(TIME_TEMPLATE).format(new Date());
         LocalDateTime localDate = LocalDateTime.now();
@@ -107,7 +111,7 @@ public final class DriverUtils {
         //
         File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(scrFile, new File("./" + currentTime + "_screenshot.png"));
+            FileUtils.copyFile(scrFile, new File("./screenshots/" + currentTime + "_screenshot.png"));
         } catch (IOException e) {
             // Log.error
             throw new RuntimeException(e);
@@ -118,7 +122,7 @@ public final class DriverUtils {
         String currentTime = new SimpleDateFormat(TIME_TEMPLATE).format(new Date());
         String pageSource = getDriver().getPageSource();
         byte[] strToBytes = pageSource.getBytes();
-        Path path = Paths.get("./" + currentTime + "_" + "_source.html.txt");
+        Path path = Paths.get("./screenshots/" + currentTime + "_" + "_source.html.txt");
         try {
             Files.write(path, strToBytes, StandardOpenOption.CREATE);
         } catch (IOException e) {
@@ -137,6 +141,11 @@ public final class DriverUtils {
         js.executeScript(String.format(LOCALSTORAGE_REMOVE_ITEM, "refreshToken"));
     }
 
+
+    public static void scrollToElement(WebElement webElement) {
+        JavascriptExecutor js = (JavascriptExecutor) getDriver();
+        js.executeScript("arguments[0].scrollIntoView(true);", webElement);
+    }
     public static void quit() {
 //        if (driver != null) {
 //            driver.quit();

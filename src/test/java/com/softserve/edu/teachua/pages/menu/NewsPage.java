@@ -9,14 +9,13 @@ public class NewsPage extends TopSearchPart {
 
     private WebElement cityNewsLabel;
 
-    public NewsPage(WebDriver driver) {
-        super(driver);
+    public NewsPage() {
         initElements();
     }
 
     private void initElements() {
         // init elements
-        cityNewsLabel = driver.findElement(By.cssSelector("div.club-sider h2.city-name"));
+        cityNewsLabel = search.cssSelector("div.club-sider h2.city-name");
     }
 
     // Page Object

@@ -1,5 +1,7 @@
 package com.softserve.edu.teachua.pages.user;
 
+import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,7 +13,8 @@ import java.util.List;
 
 public class LoggedDropdown {
 
-    private WebDriver driver;
+    //private WebDriver driver;
+    protected Search search;
     //
     private WebElement addClubLink;
     private WebElement addCenterLink;
@@ -19,17 +22,18 @@ public class LoggedDropdown {
     private WebElement personalProfileLink;
     private WebElement signOutLink;
 
-    public LoggedDropdown(WebDriver driver) {
-        this.driver = driver;
+    public LoggedDropdown() {
+        //this.driver = driver;
+        search = SearchStrategy.getSearch();
         initElements();
     }
 
     private void initElements() {
-        addClubLink = driver.findElement(By.cssSelector("li[data-menu-id*='club'] > span.ant-dropdown-menu-title-content"));
-        addCenterLink = driver.findElement(By.cssSelector("li[data-menu-id*='centre'] > span"));
-        searchCertificatesLink = driver.findElement(By.cssSelector("li[data-menu-id*='certificates'] > span"));
-        personalProfileLink = driver.findElement(By.cssSelector("li[data-menu-id*='profile'] > span"));
-        signOutLink = driver.findElement(By.cssSelector("li[data-menu-id*='logout'] > span"));
+        addClubLink = search.cssSelector("li[data-menu-id*='club'] > span.ant-dropdown-menu-title-content");
+        addCenterLink = search.cssSelector("li[data-menu-id*='centre'] > span");
+        searchCertificatesLink = search.cssSelector("li[data-menu-id*='certificates'] > span");
+        personalProfileLink = search.cssSelector("li[data-menu-id*='profile'] > span");
+        signOutLink = search.cssSelector("li[data-menu-id*='logout'] > span");
     }
 
     // Page Object

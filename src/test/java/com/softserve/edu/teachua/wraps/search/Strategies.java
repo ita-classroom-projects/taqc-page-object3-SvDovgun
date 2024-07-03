@@ -26,11 +26,19 @@ class ExplicitStrategyVisible implements Strategy {
     }
 }
 
+class ExplicitStrategyExistText implements Strategy {
+    public Search getStrategy() {
+        return new SearchExplicitExistText();
+    }
+}
+
 public enum Strategies {
     DEFAULT_STRATEGY(new ImplicitStrategy()),
     IMPLICIT_STRATEGY(new ImplicitStrategy()),
     EXPLICIT_PRESENT_STRATEGY(new ExplicitStrategyPresent()),
-    EXPLICIT_VISIBLE_STRATEGY(new ExplicitStrategyVisible());
+    EXPLICIT_VISIBLE_STRATEGY(new ExplicitStrategyVisible()),
+    EXPLICIT_EXIST_TEXT_STRATEGY(new ExplicitStrategyExistText());
+
 
     private Strategy strategy;
 

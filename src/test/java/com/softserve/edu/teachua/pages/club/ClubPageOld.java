@@ -12,16 +12,16 @@ public class ClubPageOld extends TopSearchPart {
     private WebElement clubDescriptionLabel;
     private WebElement clubDetailsLink;
 
-    public ClubPageOld(WebDriver driver) {
-        super(driver);
+    public ClubPageOld() {
+        //super(driver);
         initElements();
     }
 
     private void initElements() {
         // init elements
-        clubTitleLink = driver.findElement(By.cssSelector("div.ant-card.ant-card-bordered.card div.name"));
-        clubDescriptionLabel = driver.findElement(By.cssSelector("p.description"));
-        clubDetailsLink = driver.findElement(By.cssSelector("a.details-button > a"));
+        clubTitleLink = search.cssSelector("div.ant-card.ant-card-bordered.card div.name");
+        clubDescriptionLabel = search.cssSelector("p.description");
+        clubDetailsLink = search.cssSelector("a.details-button > a");
     }
 
     // Page Object
@@ -71,12 +71,12 @@ public class ClubPageOld extends TopSearchPart {
 
     public ClubInfoModal openClubInfoModal() {
         clickClubTitleLink();
-        return new ClubInfoModal(driver);
+        return new ClubInfoModal();
     }
 
     public ClubDetailsPage gotoClubDetailsPage() {
         clickClubDetailsLink();
-        return new ClubDetailsPage(driver);
+        return new ClubDetailsPage();
     }
 
 }

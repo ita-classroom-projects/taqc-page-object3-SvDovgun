@@ -52,6 +52,13 @@ public abstract class Search {
 
     // Search Element
 
+    public List<WebElement> webElements(By by) {
+        return searchWebElements(by);
+    }
+
+    public boolean isLocatedCss(String cssSelector) {
+        return cssSelectors(cssSelector).size() > 0;
+    }
     public WebElement id(String id) {
         return searchWebElement(By.id(id));
     }

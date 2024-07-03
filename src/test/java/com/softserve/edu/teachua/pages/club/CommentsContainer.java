@@ -1,5 +1,7 @@
 package com.softserve.edu.teachua.pages.club;
 
+import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,24 +14,24 @@ public class CommentsContainer {
     public final String COMMENT_NOT_FOUND = "There is no comments that matches the search criteria.";
     private final String COMMENT_COMPONENT_CSSSELECTOR = "li div.ant-comment";
     //
-    protected WebDriver driver;
+    protected Search search;
     //
     private List<CommentComponent> commentComponents;
     private WebElement showMoreButton;
 
-    public CommentsContainer(WebDriver driver) {
-        this.driver = driver;
+    public CommentsContainer() {
+        search = SearchStrategy.getSearch();
         initElements();
     }
 
     private void initElements() {
         // init elements
         commentComponents = new ArrayList<>();
-        for (WebElement current : driver.findElements(By.cssSelector(COMMENT_COMPONENT_CSSSELECTOR))) {
-            commentComponents.add(new CommentComponent(driver, current));
+        for (WebElement current : search.cssSelectors(COMMENT_COMPONENT_CSSSELECTOR)) {
+            commentComponents.add(new CommentComponent(current));
         }
         if (getCommentComponents().size() > 0) {
-            showMoreButton = driver.findElement(By.cssSelector("button.show-more-button"));
+            showMoreButton = search.cssSelector("button.show-more-button");
         }
     }
 

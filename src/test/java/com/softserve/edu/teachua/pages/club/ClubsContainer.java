@@ -1,6 +1,8 @@
 package com.softserve.edu.teachua.pages.club;
 
 import com.softserve.edu.teachua.pages.top.TopPart;
+import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,7 +18,8 @@ public class ClubsContainer {
     private final String PAGINATION_NUMBERS_XPATHSELECTOR =
             "//li[contains(@class,'ant-pagination-item')]/a[text()='%d']";
     //
-    protected WebDriver driver;
+    //protected WebDriver driver;
+    protected Search search;
     //
     private List<ClubComponent> clubComponents;
     private WebElement previousItem;
@@ -24,8 +27,9 @@ public class ClubsContainer {
     private WebElement previousPageLink;
     private WebElement nextPageLink;
 
-    public ClubsContainer(WebDriver driver) {
-        this.driver = driver;
+    public ClubsContainer() {
+        //this.driver = driver;
+        search = SearchStrategy.getSearch();
         initElements();
     }
 
@@ -37,16 +41,16 @@ public class ClubsContainer {
         }
         // init elements
         clubComponents = new ArrayList<>();
-        for (WebElement current : driver.findElements(By.cssSelector(CLUBS_COMPONENT_CSSSELECTOR))) {
-            clubComponents.add(new ClubComponent(driver, current));
+        for (WebElement current : search.cssSelectors(CLUBS_COMPONENT_CSSSELECTOR)) {
+            clubComponents.add(new ClubComponent(current));
         }
         if (clubComponents.size() == 0) {
             throw new RuntimeException(CLUBS_NOT_FOUND);
         }
-        previousItem = driver.findElement(By.cssSelector("li[title='Previous Page']"));
-        nextItem = driver.findElement(By.cssSelector("li[title='Next Page']"));
-        previousPageLink = driver.findElement(By.cssSelector("li[title='Previous Page'] > button"));
-        nextPageLink = driver.findElement(By.cssSelector("li[title='Next Page'] > button"));
+        previousItem = search.cssSelector("li[title='Previous Page']");
+        nextItem = search.cssSelector("li[title='Next Page']");
+        previousPageLink = search.cssSelector("li[title='Previous Page'] > button");
+        nextPageLink = search.cssSelector("li[title='Next Page'] > button");
     }
 
     // Page Object
@@ -181,8 +185,8 @@ public class ClubsContainer {
 
     public void clickPageLinkByNumber(int numberPage) {
         WebElement pageLink = null;
-        List<WebElement> paginationNumbers = driver.findElements(By
-                .xpath(String.format(PAGINATION_NUMBERS_XPATHSELECTOR, numberPage)));
+        List<WebElement> paginationNumbers = search
+                .xpaths(String.format(PAGINATION_NUMBERS_XPATHSELECTOR, numberPage));
         if (paginationNumbers.size() > 0) {
             paginationNumbers.get(0).click();
         }

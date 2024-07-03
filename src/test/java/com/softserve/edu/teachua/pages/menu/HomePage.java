@@ -22,7 +22,6 @@ public class HomePage extends TopSearchPart {
     */
 
     public HomePage() {
-        super(DriverUtils.getDriver());
         initElements();
     }
 
@@ -66,7 +65,7 @@ public class HomePage extends TopSearchPart {
     // addClubButton
     public LoginModal openLoginModalAddClub() {
         clickAddClubButton();
-        return new LoginModal(driver);
+        return new LoginModal();
     }
 
     /* // Next

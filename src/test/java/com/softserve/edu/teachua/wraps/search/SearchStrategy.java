@@ -4,6 +4,8 @@ import com.softserve.edu.teachua.tools.PropertiesUtils;
 
 public final class SearchStrategy {
     private static Search search;
+    private static Strategies currentStrategy;
+    private static Strategies previousStrategy;
 
     static {
         initSearch();
@@ -53,8 +55,25 @@ public final class SearchStrategy {
     public static Search setExplicitVisibleStrategy() {
         return setStrategy(Strategies.EXPLICIT_VISIBLE_STRATEGY);
     }
+
+    public static Search setExplicitExistText() {
+        return setStrategy(Strategies.EXPLICIT_EXIST_TEXT_STRATEGY);
+    }
+
+    public static Search restoreStrategy() {
+        if (previousStrategy == null) {
+            return getSearch();
+        }
+        return setStrategy(previousStrategy);
+    }
+
     
     public static Search setStrategy(Strategies strategy) {
+        if (currentStrategy == null) {
+            currentStrategy = strategy;
+        }
+        previousStrategy = currentStrategy;
+        currentStrategy = strategy;
         search = strategy.getStrategy();
         return search;
     }

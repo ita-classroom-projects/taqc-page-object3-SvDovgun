@@ -1,6 +1,9 @@
 package com.softserve.edu.teachua.pages.challenge;
 
 import com.softserve.edu.teachua.pages.top.TopPart;
+import com.softserve.edu.teachua.wraps.browser.DriverUtils;
+import com.softserve.edu.teachua.wraps.search.Search;
+import com.softserve.edu.teachua.wraps.search.SearchStrategy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -8,21 +11,21 @@ import org.openqa.selenium.WebElement;
 
 public class YoutubeFrame {
 
-    private WebDriver driver;
+    protected Search search;
     //
     private WebElement videoPlayerLink;
     private WebElement videoPlayButton;
     private WebElement youtubeLink;
 
-    public YoutubeFrame(WebDriver driver) {
-        this.driver = driver;
+    public YoutubeFrame() {
+        search = SearchStrategy.getSearch();
         initElements();
     }
 
     private void initElements() {
-        videoPlayerLink = driver.findElement(By.cssSelector("div.html5-video-player"));
-        videoPlayButton = driver.findElement(By.cssSelector("button[aria-label='Play']"));
-        youtubeLink = driver.findElement(By.cssSelector("a[title='Watch on YouTube']"));
+        videoPlayerLink = search.cssSelector("div.html5-video-player");
+        videoPlayButton = search.cssSelector("button[aria-label='Play']");
+        youtubeLink = search.cssSelector("a[title='Watch on YouTube']");
     }
 
     // Page Object
@@ -71,8 +74,8 @@ public class YoutubeFrame {
 
     public ChallengeTeachPage gotoChallengeTeachPage() {
         // Return to ChallengeTeachPage
-        driver.switchTo().defaultContent();
-        return new ChallengeTeachPage(driver);
+        DriverUtils.switchToDefaultContent();
+        return new ChallengeTeachPage();
     }
 
 }

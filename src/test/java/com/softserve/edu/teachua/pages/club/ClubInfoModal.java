@@ -1,29 +1,29 @@
 package com.softserve.edu.teachua.pages.club;
 
+import com.softserve.edu.teachua.wraps.search.Search;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class ClubInfoModal {
 
-    private WebDriver driver;
+    protected Search search;
 
     private WebElement ariaCloseButton;
     private WebElement clubTitleLabel;
     private WebElement clubMoreButton;
     private WebElement clubDescriptionLabel;
 
-    public ClubInfoModal(WebDriver driver) {
-        this.driver = driver;
+    public ClubInfoModal() {
         initElements();
     }
 
     private void initElements() {
         // init elements
-        ariaCloseButton = driver.findElement(By.cssSelector("button[aria-label='Close']"));
-        clubTitleLabel = driver.findElement(By.cssSelector("div.title div.club-name"));
-        clubMoreButton = driver.findElement(By.cssSelector("button.more-button"));
-        clubDescriptionLabel = driver.findElement(By.cssSelector("div.about-club div.description"));
+        ariaCloseButton = search.cssSelector("button[aria-label='Close']");
+        clubTitleLabel = search.cssSelector("div.title div.club-name");
+        clubMoreButton = search.cssSelector("button.more-button");
+        clubDescriptionLabel = search.cssSelector("div.about-club div.description");
     }
 
     // Page Object
@@ -74,13 +74,13 @@ public class ClubInfoModal {
 
     public ClubPage closeClubInfoModal() {
         clickAriaCloseButton();
-        return new ClubPage(driver);
+        return new ClubPage();
     }
 
     // moreAboutClub
     public ClubDetailsPage gotoClubDetailsPage() {
         clickClubMoreButton();
-        return new ClubDetailsPage(driver);
+        return new ClubDetailsPage();
     }
 
 }

@@ -13,15 +13,15 @@ public abstract class TopSearchPart extends TopPart {
     private WebElement searchInput;
     private WebElement advancedSearchButton;
 
-    public TopSearchPart(WebDriver driver) {
-        super(driver);
+    public TopSearchPart() {
+        //super(driver);
         initElements();
     }
 
     private void initElements() {
         // init elements
-        searchInput = driver.findElement(By.cssSelector("input.ant-select-selection-search-input"));
-        advancedSearchButton = driver.findElement(By.cssSelector("span.advanced-icon[aria-label='control']"));
+        searchInput = search.cssSelector("input.ant-select-selection-search-input");
+        advancedSearchButton = search.cssSelector("span.advanced-icon[aria-label='control']");
     }
 
     // Page Object
@@ -69,17 +69,17 @@ public abstract class TopSearchPart extends TopPart {
 
     public ClubPage successfulSearchClub(String searchText) {
         fillSearchInput(searchText);
-        return new ClubPage(driver);
+        return new ClubPage();
     }
 
     public ClubNotFoundPage unsuccessfulSearchClub(String searchText) {
         fillSearchInput(searchText);
-        return new ClubNotFoundPage(driver);
+        return new ClubNotFoundPage();
     }
 
     public AdvancedClubPage gotoAdvancedClubPage() {
         clickAdvancedSearchButton();
-        return new AdvancedClubPage(driver);
+        return new AdvancedClubPage();
     }
 
 }

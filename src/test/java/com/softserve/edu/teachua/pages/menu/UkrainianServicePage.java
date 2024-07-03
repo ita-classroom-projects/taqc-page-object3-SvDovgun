@@ -9,14 +9,13 @@ public class UkrainianServicePage extends TopSearchPart {
 
     private WebElement faqTitleLabel;
 
-    public UkrainianServicePage(WebDriver driver) {
-        super(driver);
+    public UkrainianServicePage() {
         initElements();
     }
 
     private void initElements() {
         // init elements
-        faqTitleLabel = driver.findElement(By.cssSelector("div.faq-title"));
+        faqTitleLabel = search.cssSelector("div.faq-title");
     }
 
     // Page Object
